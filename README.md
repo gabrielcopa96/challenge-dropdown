@@ -16,6 +16,6 @@ O también clonando el repositorio
 
 `$ git clone url`
 
-## Link repositorio
+## Link deployment
 
-[a link](https://challenge-dropdown.netlify.app/)
+[link deployment](https://challenge-dropdown.netlify.app/)
