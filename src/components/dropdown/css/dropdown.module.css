@@ -1,0 +1,57 @@
+.containerDropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.filterdropdown {
+    display: flex;
+    gap: 1rem;
+}
+
+.inputDropDown {
+    padding: .1rem .4rem;
+    width: 220px;
+    height: 1.9rem;
+    border: 1px solid #646cff;
+    outline: none;
+}
+
+.filterdropdown select {
+    height: 2.2rem;
+    border: 1px solid #646cff;
+    outline: none;
+}
+
+.containOpen {
+    border: 1px solid #646cff;
+    padding-top: 1.2rem;
+    display: flex;
+    height: 185px;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: scroll;
+}
+
+.containOpen span {
+    border-bottom: 1px solid #646cff3d;
+    cursor: pointer;
+    padding-bottom: .3rem;
+}
+
+.containOpen span:hover {
+    background-color: #646cff;
+    width: 100%;
+}
+
+.containOpen span:nth-child(1) {
+    color: #646cff;
+}
+
+.containOpen span:nth-child(1):hover {
+    background-color: #fff;   
+    font-weight: 600;
+    width: 100%;
+}
+

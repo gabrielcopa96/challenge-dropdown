@@ -1,0 +1,131 @@
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-content: center;
+}
+
+.contenedorModal {
+    width: 500px;
+    min-height: 120px;
+    background-color: #fff;
+    position: relative;
+    border-radius: .2rem;
+    box-shadow: rgba(100,100,111, 0.2) 0px 7px 29px 0px;
+    padding: 1rem; 
+}
+
+.contenedorModal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    
+    border-bottom: 1px solid #646cff;
+}
+
+.contenedorModal h3 {
+    font-weight: 500;
+    font-size: 1.2em;
+    color:black;
+}
+
+.encabezadoModal{
+    color:rgb(0, 0, 0);
+    font-size: .90rem;
+    margin: 0 auto;
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blockFormModal {
+    display: grid;
+    grid-template-columns: auto;
+    gap: .2rem;
+}
+
+.blockFormModal input {
+    padding: .1rem .4rem;
+    width: 210px;
+    height: 1.9rem;
+    border: 1px solid #646cff;
+}
+
+.btnCerrarModal {
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.4em .8em;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s; 
+}
+
+.btnCerrarModal:hover {
+    background-color: #646cff;
+    transition: all 0.25s; 
+}
+
+.btnEditar {
+    width: auto;
+    cursor: pointer;
+    background-color: #646cff;
+    border: none;
+    border-radius: .2rem;
+    height: 35px;
+}
+
+.btnEditarDisabled {
+    background-color: #797979;
+    border: none;
+    border-radius: .2rem;
+    height: 35px;
+    cursor: not-allowed;
+}
+
+.btnAceptar {
+    width: auto;
+    cursor: pointer;
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: .2rem;
+    height: 35px;
+}
+
+.btnAceptar:hover {
+    background-color: #646cff;
+    transition: all 0.25s; 
+}
+
+.containerBtns {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnConfirmar {
+    width: auto;
+    cursor: pointer;
+    background-color: #1bac74;
+    border: none;
+    border-radius: .2rem;
+    height: 35px;
+}
+
+.btnConfirmarDisabled {
+    background-color: #797979;
+    border: none;
+    border-radius: .2rem;
+    height: 35px;
+    cursor: not-allowed;
+}
