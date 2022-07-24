@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import Modal from "../modal/Modal";
 
 import { useData, useModal, useDropdown } from "../../hooks";
@@ -23,12 +21,6 @@ const Dropdown = () => {
       const shouldOpenDropDown = /[a-zA-Z\d\s]{1,254}$/.test(value);
 
       setOpen(shouldOpenDropDown);
-      // if( inputRef.current ) {
-      //   setOpen(true)
-      // } else {
-      //   setOpen(false)
-      // }
-
       let matches = []
 
       if(value.length > 0) {
@@ -50,14 +42,6 @@ const Dropdown = () => {
     const handleSelectProp = (e) => {
       setType(e.target.value);
     }
-
-
-    useEffect(() => {
-      console.log('se cambio de pagina')
-    }, [currentPage])
-
-    
-    
 
     const openModal = (e, id, nombre, nit, razonsocial, codigo, telefono, editable = true) => {
       setEstadoModal(!estadoModal);
@@ -91,8 +75,10 @@ const Dropdown = () => {
             <input type="text" className={styles.inputDropDown} placeholder="buscar..." onKeyUp={handleClickDrop} ref={inputRef} onBlur={handleClickDrop}/>
             {
                 open && <div className={styles.containOpen} ref={scrollRef}>
-                  <span onClick={(e) => openModal(e)}> + Agregar nuevo registro </span>
-                  {sugerencias.map( (x,y) => <span key={y} onClick={(e) => openModal(e, x.id, x.nombre, x.nit, x['razon social'], x.codigo, x.telefono)}>{x.nombre}</span>)}
+          
+                    <span onClick={(e) => openModal(e)}> + Agregar nuevo registro </span>
+                    {sugerencias.map( (x,y) => <span key={y} onClick={(e) => openModal(e, x.id, x.nombre, x.nit, x['razon social'], x.codigo, x.telefono)}>{x.nombre}</span>)}
+
                 </div>
             }
           </div>
