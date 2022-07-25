@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import db from '../services/firebase';
+
+import { useQuery } from 'react-query';
 
 import { collection, getDocs } from "firebase/firestore";
 
@@ -20,31 +22,22 @@ export const useData = (data, setData) => {
         codigo: '',
         editable: false,
       } );
+
+    const getData = async () => {
+        const data = await getDocs( collection(db, "enterpise"));
+        setMisDatos( data.docs.map( x => {
+            return {
+                id: x.id,
+                ...x.data()
+            }
+        }) );
     
-    useEffect(() => {
+    }
+    
+    const {data: registros, isLoading, error} = useQuery(["registros"], getData);
 
 
-        if(misDatos.lenght) return;
-
-        const getMisDatos = async () => {
-
-            const datos = await getDocs(collection(db, "enterpise"));
-
-            setMisDatos(datos.docs.map( x => {
-                
-                  return {
-                      id: x.id,
-                      ...x.data()
-                  }
-  
-            }));
-
-        }
-
-        getMisDatos();
-
-    }, [])
-
+   
 
     return {
         misDatos,
