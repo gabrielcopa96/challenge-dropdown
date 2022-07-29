@@ -25,7 +25,7 @@ export const useUpdate = (dataForm, cambiarEstado, id ) => {
   
     }
 
-    const { mutate: updateRegistro, error: errorUpdate, isLoading: isLoadingUpdate } = useMutation(editDocuments, {
+    const { mutate: updateRegistro, error: errorUpdate } = useMutation(editDocuments, {
         onSuccess: () => {
           queryClient.invalidateQueries(["registros"]);
         }
@@ -33,8 +33,7 @@ export const useUpdate = (dataForm, cambiarEstado, id ) => {
 
     return {
         updateRegistro,
-        errorUpdate,
-        isLoadingUpdate,
+        errorUpdate
     }
 
 }

@@ -26,9 +26,7 @@ export const useData = () => {
         return data.docs.map( x => { return { id: x.id, ...x.data() } } );
     }
     
-    const {data: registros, isLoading, error} = useQuery(["registros"], getData);
-
-
+    const {data: registros } = useQuery(["registros"], getData);
 
     return {
         registros,

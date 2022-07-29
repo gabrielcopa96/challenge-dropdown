@@ -17,7 +17,7 @@ export const useAggregate = (dataForm, cambiarEstado ) => {
         cambiarEstado(false); // cierro el modal
     }
 
-    const { mutate: nuevoRegistro, error: errorNuevoRegistro, isLoading: isLoadingNuevoRegistro } = useMutation(newDocuments, {
+    const { mutate: nuevoRegistro, error: errorNuevoRegistro } = useMutation(newDocuments, {
         onSuccess: () => {
           queryClient.invalidateQueries(["registros"]);
         }
@@ -25,8 +25,7 @@ export const useAggregate = (dataForm, cambiarEstado ) => {
 
     return {
         nuevoRegistro,
-        errorNuevoRegistro,
-        isLoadingNuevoRegistro,
+        errorNuevoRegistro
     }
 
 }

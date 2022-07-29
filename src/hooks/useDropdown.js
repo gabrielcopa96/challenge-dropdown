@@ -6,8 +6,6 @@ export const useDropdown = () => {
     const scrollRef = useRef();
 
     const [ open, setOpen ] = useState( false );
-    const [ currentPage, setCurrentPage ] = useState( 1 );
-    const [ itemsPerPage, setItemsPerPage ] = useState( 20 );
     const [ sugerencias, setSugerencias ] = useState( [] );
 
     return {
@@ -16,11 +14,7 @@ export const useDropdown = () => {
         sugerencias,
         setSugerencias,
         inputRef,
-        scrollRef,
-        currentPage,
-        setCurrentPage,
-        itemsPerPage,
-        setItemsPerPage
+        scrollRef
     }
 }
 
