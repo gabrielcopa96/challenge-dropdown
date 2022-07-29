@@ -7,9 +7,9 @@ import styles from './css/dropdown.module.css';
 
 const Dropdown = () => {
 
-    const { misDatos, setMisDatos, datos, setDatos, type, setType } = useData();
+    const { registros, datos, setDatos, type, setType } = useData();
     const { estadoModal, setEstadoModal } = useModal();
-    const { open, setOpen, sugerencias, setSugerencias, inputRef, scrollRef, currentPage, setCurrentPage, setItemsPerPage, itemsPerPage } = useDropdown();
+    const { open, setOpen, sugerencias, setSugerencias, inputRef, scrollRef, currentPage, itemsPerPage } = useDropdown();
 
     let indexOfLastItem = currentPage * itemsPerPage;
     let indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -21,22 +21,17 @@ const Dropdown = () => {
       const shouldOpenDropDown = /[a-zA-Z\d\s]{1,254}$/.test(value);
 
       setOpen(shouldOpenDropDown);
-      let matches = []
 
       if(value.length > 0) {
-        matches = misDatos.filter( dato => {
+        setSugerencias(registros.filter( dato => {
           const regex = new RegExp(value, "gi");
             if(typeof dato[type] === "number") {
               return dato[type].toString().match(regex);
             }
             return dato[type].match(regex);
-        })
-      }
-
-      let sug = matches.slice(indexOfFirstItem, indexOfLastItem);
-      
-      setSugerencias(sug);
-
+          })
+        );
+      };      
     }
 
     const handleSelectProp = (e) => {
@@ -45,6 +40,9 @@ const Dropdown = () => {
 
     const openModal = (e, id, nombre, nit, razonsocial, codigo, telefono, editable = true) => {
       setEstadoModal(!estadoModal);
+
+      inputRef.current.value = "";
+
       if(nombre, nit, razonsocial, codigo, telefono) {
 
       setDatos({
@@ -68,6 +66,7 @@ const Dropdown = () => {
       setOpen(false);
     }
 
+
   return (
     <div className={styles.containerDropdown}>
         <div className={styles.filterdropdown}>
@@ -82,7 +81,7 @@ const Dropdown = () => {
                 </div>
             }
           </div>
-          <select onChange={handleSelectProp}>
+          <select onChange={handleSelectProp} className={styles.selectFilter}>
             <option>Selecciona filtro...</option>
             <option value="codigo">Codigo</option>
             <option value="nombre">Nombre</option>
@@ -93,6 +92,8 @@ const Dropdown = () => {
           {
             estadoModal && <Modal estado={estadoModal} cambiarEstado={openModal} nombre={datos.nombre} nit={datos.nit} codigo={datos.codigo} razons={datos.razonsocial} telefono={datos.telefono} editable={datos.editable} id={datos.id}/>
           }
+        </div>
+        <div>
         </div>
     </div>
   )

@@ -1,24 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './css/modal.module.css';
 
-import db from '../../services/firebase';
-import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
-
+import { useAggregate, useUpdate } from '../../hooks';
 
 const Modal = (props) => {
   
-  const { estado, cambiarEstado, nombre, razons, nit, codigo, telefono, editable, id } = props;
+  const { estado, cambiarEstado, nombre, razons, nit, codigo, telefono, editable, id } = props; // me traigo los props del componente padre
 
-  const [dataForm, setDataForm] = useState({
+  const [dataForm, setDataForm] = useState({ // me traigo los datos del formulario
     nombre: nombre,
     "razon social": razons,
     nit: nit,
     codigo: codigo,
     telefono: telefono,
   })
+
+  useEffect(() => {
+
+    return () => {
+      if(editable === true) {
+        setDataForm({
+          nombre: "",
+          "razon social": "",
+          nit: 0,
+          codigo: "",
+          telefono: 0,
+        });
+      }  
+    }
+
+  }, [])
   
 
-  const [confirm, setConfirm] = useState({
+  const [confirm, setConfirm] = useState({ // me traigo los datos del formulario para verificar si estan correctos
     inputNombre: false,
     inputRazon: false,
     inputNit: false,
@@ -26,46 +40,29 @@ const Modal = (props) => {
     inputTelefono: false,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { nuevoRegistro } = useAggregate( dataForm, cambiarEstado );
 
-    if(editable === false) {
+  const { updateRegistro } = useUpdate( dataForm, cambiarEstado, id );
 
-      const editDocuments = async() => {
-        
-        const editDoc = doc(db, `enterpise`, id);
 
-        await updateDoc(editDoc, {
-        nombre: dataForm.nombre,
-        "razon social": dataForm["razon social"],
-        nit: dataForm.nit,
-        codigo: dataForm.codigo,
-        telefono: dataForm.telefono,
-      });
+  const handleSubmit = (e) => { // me traigo los datos del formulario
+    e.preventDefault(); // evito que se recargue la pagina
 
-      cambiarEstado(false);
+    if(editable === false) { // si es un nuevo registro
 
-    }
-
-    editDocuments();
+      updateRegistro();
 
     } else {
 
-      const newDocuments = async() => {
-        const newDoc = await addDoc(collection(db, "enterpise"), dataForm);
+      nuevoRegistro(); // llamo a la funcion para agregar un nuevo registro
 
-        cambiarEstado(false);
-      }
-
-      newDocuments();
     }
   }
 
-
-  const handleChange = (e) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value
+  const handleChange = (e) => { // me traigo los datos del formulario
+    setDataForm({ // actualizo el formulario
+      ...dataForm, // me traigo los datos del formulario
+      [e.target.name]: e.target.value // actualizo el dato del formulario
     })
   }
 

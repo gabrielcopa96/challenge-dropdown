@@ -2,14 +2,12 @@ import { useState } from 'react';
 
 import db from '../services/firebase';
 
-import { useQuery } from 'react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
 import { collection, getDocs } from "firebase/firestore";
 
 
-export const useData = (data, setData) => {
-    
-    const [misDatos, setMisDatos] = useState( [] );
+export const useData = () => {
 
     const [type, setType] = useState( "nombre" );
 
@@ -25,23 +23,15 @@ export const useData = (data, setData) => {
 
     const getData = async () => {
         const data = await getDocs( collection(db, "enterpise"));
-        setMisDatos( data.docs.map( x => {
-            return {
-                id: x.id,
-                ...x.data()
-            }
-        }) );
-    
+        return data.docs.map( x => { return { id: x.id, ...x.data() } } );
     }
     
     const {data: registros, isLoading, error} = useQuery(["registros"], getData);
 
 
-   
 
     return {
-        misDatos,
-        setMisDatos,
+        registros,
         datos,
         setDatos,
         type,
